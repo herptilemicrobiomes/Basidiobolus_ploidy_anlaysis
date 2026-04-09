@@ -61,21 +61,21 @@ dat <- dat |>
   ungroup()
 
 # ===========================================================================
-# 1. Histogram – log2 x-axis, one panel per strain
-#    log2 scale: each unit = one doubling; ploidy levels appear evenly spaced
+# 1. Histogram – log10 x-axis, one panel per strain
+#    log10 scale: each unit = one doubling; ploidy levels appear evenly spaced
 # ===========================================================================
 p_hist <- ggplot(dat, aes(x = mean, fill = type)) +
   geom_histogram(bins = 60, position = "identity", alpha = 0.65, colour = NA) +
   facet_wrap(~strain, scales = "free_y") +
   scale_x_continuous(
-    trans  = "log2",
+    trans  = "log10",
     labels = scales::label_number(accuracy = 1)
   ) +
   scale_fill_manual(values = type_colors, labels = type_labels,
                     name = "Scaffold type") +
   labs(
-    title = "Distribution of per-scaffold mean coverage depth by strain (log2 scale)",
-    x     = "Mean depth of coverage (log2)",
+    title = "Distribution of per-scaffold mean coverage depth by strain (log10 scale)",
+    x     = "Mean depth of coverage (log10)",
     y     = "Count"
   ) +
   theme_bw(base_size = 11) +
@@ -89,22 +89,22 @@ ggsave(hist_out, p_hist, width = 14, height = 10)
 message("Saved histogram -> ", hist_out)
 
 # ===========================================================================
-# 2. Box-and-whisker – log2 y-axis, one box per scaffold type, panels per strain
+# 2. Box-and-whisker – log10 y-axis, one box per scaffold type, panels per strain
 # ===========================================================================
 p_box <- ggplot(dat, aes(x = type, y = mean, fill = type)) +
   geom_boxplot(outlier.size = 0.8, outlier.alpha = 0.5, width = 0.5) +
   facet_wrap(~strain, scales = "free_y") +
   scale_y_continuous(
-    trans  = "log2",
+    trans  = "log10",
     labels = scales::label_number(accuracy = 1)
   ) +
   scale_fill_manual(values = type_colors, labels = type_labels,
                     name = "Scaffold type") +
   scale_x_discrete(labels = type_labels) +
   labs(
-    title = "Per-scaffold mean coverage depth by strain and scaffold type (log2 scale)",
+    title = "Per-scaffold mean coverage depth by strain and scaffold type (log10 scale)",
     x     = "Scaffold type",
-    y     = "Mean depth of coverage (log2)"
+    y     = "Mean depth of coverage (log10)"
   ) +
   theme_bw(base_size = 11) +
   theme(
@@ -129,17 +129,17 @@ p_norm <- ggplot(dat, aes(x = strain, y = mean_norm, fill = type)) +
   geom_boxplot(outlier.size = 0.8, outlier.alpha = 0.5, width = 0.6,
                position = position_dodge(width = 0.7)) +
   scale_y_continuous(
-    trans  = "log2",
+    trans  = "log10",
     breaks = c(0.25, 0.5, 1, 1.5, 2, 3, 4),
     labels = scales::label_number(accuracy = 0.01)
   ) +
   scale_fill_manual(values = type_colors, labels = type_labels,
                     name = "Scaffold type") +
   labs(
-    title = "Median-normalised coverage across strains (log2 scale)",
+    title = "Median-normalised coverage across strains (log10 scale)",
     subtitle = "1.0 = strain median; dashed lines at 0.5×, 1×, 1.5×, 2× median",
     x     = "Strain",
-    y     = "Coverage / strain median (log2)"
+    y     = "Coverage / strain median (log10)"
   ) +
   theme_bw(base_size = 11) +
   theme(
