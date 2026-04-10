@@ -5,5 +5,6 @@ UHM207.4505,UHM207_4505_1.fq.gz,UHM207_4505_2_fixed.fq.gz
 UHM260.5136,UHM260_5136_1.fq.gz,UHM260_5136_2.fq.gz
 UHM516.7697,UHM516_7697_1.fq.gz,UHM516_7697_2.fq.gz
 UHM520.7734,UHM520_7734_1.fq.gz,UHM520_7734_2.fq.gz
-Bmer_CBS931.73,Bmer_CBS931.73_1.fastq.gz,Bmer_CBS931.73_2.fastq.gz
-Bmicro_NRRL_2992,Bmicro_NRRL_2992.fastq.gz,
+CBS931.73,Bmer_CBS931.73_1.fastq.gz,Bmer_CBS931.73_2.fastq.gz
+NRRL2992,Bmicro_NRRL2992.pacbio.fastq.gz,
+CBS931.73_pb,CBS931.73.pacbio.fastq.gz,

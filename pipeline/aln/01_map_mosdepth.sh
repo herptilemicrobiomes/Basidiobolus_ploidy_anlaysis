@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH -p short -c 24 --mem 24gb --out logs/bwamem.%a.log
+#SBATCH -p short -c 96 --mem 96gb --out logs/bwamem.%a.log
 
 : "${SCRATCH:?SCRATCH environment variable is not set}"
 
@@ -37,7 +37,7 @@ do
         else
             module load bwa-mem2
             module load samtools
-            bwa-mem2 mem -o ${SCRATCH}/${ID}.sam -t ${CPU} $DB/${ID}.masked.fasta $IN/$FWD $IN/$REV
+            bwa-mem2 mem -M -k 15 -c 1000 -o ${SCRATCH}/${ID}.sam -t ${CPU} $DB/${ID}.masked.fasta $IN/$FWD $IN/$REV
             samtools view -OBAM -F 12 -o ${SCRATCH}/${ID}.bam ${SCRATCH}/${ID}.sam
             samtools sort -OBAM -@${CPU} -o $OUT/${ID}.bam ${SCRATCH}/${ID}.bam
         fi
